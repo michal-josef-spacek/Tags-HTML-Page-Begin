@@ -9,7 +9,6 @@ build_requires:
   File::Object: 0.03
   Test::More: 0
   Test::NoWarnings: 0
-  Test::Warn: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.36
 distribution_type: module
