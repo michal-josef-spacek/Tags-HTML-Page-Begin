@@ -66,7 +66,6 @@ sub process {
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
 		['e', 'meta'],
-		# XXX Refresh?
 		['b', 'title'],
 		['d', $self->{'lang'}->{'title'}],
 		['e', 'title'],
