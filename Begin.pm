@@ -265,8 +265,6 @@ Returns undef.
 
 L<Class::Utils>,
 L<Error::Pure>,
-L<List::Utils>,
-L<MIME::Base64>,
 L<Readonly>.
 
 =head1 SEE ALSO

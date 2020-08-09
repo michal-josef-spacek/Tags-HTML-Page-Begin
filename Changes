@@ -1,4 +1,5 @@
 0.02
+ - Fix DEPENDENCIES section in doc.
  - Fix ERRORS section in doc.
  - Fix module name in doc.
 
