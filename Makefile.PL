@@ -25,8 +25,10 @@ resources 'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html'.
 	'?Name=Tags-HTML-Page-Begin';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Tags-HTML-Page-Begin';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Tags-HTML-Page-Begin';
+test_requires 'CSS::Struct::Output::Raw' => 0;
 test_requires 'English' => 0;
 test_requires 'Error::Pure::Utils' => 0.22;
+test_requires 'Tags::Output::Raw' => 0;
 test_requires 'Test::More' => 0;
 test_requires 'Test::NoWarnings' => 0;
 tests_recursive;

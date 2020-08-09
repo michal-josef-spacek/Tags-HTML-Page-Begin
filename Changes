@@ -1,5 +1,6 @@
 0.03
  - Add XML mode of Tags to EXAMPLE section in doc.
+ - Add test for constructor.
  - Remove obsolete File::Object test dependency.
  - Remove obsolete Test::Warn test dependency.
  - Remove process_css() method, we don't need build-in css.
