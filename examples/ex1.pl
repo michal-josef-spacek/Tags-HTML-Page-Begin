@@ -11,6 +11,7 @@ use Tags::Output::Indent;
 # Object.
 my $tags = Tags::Output::Indent->new(
         'preserved' => ['style'],
+        'xml' => 1,
 );
 my $css = CSS::Struct::Output::Indent->new;
 my $begin = Tags::HTML::Page::Begin->new(
@@ -38,8 +39,7 @@ print $tags->flush;
 # <!DOCTYPE html>
 # <html>
 #   <head>
-#     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-#     </meta>
+#     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 #     <title>
 #       Page title
 #     </title>
