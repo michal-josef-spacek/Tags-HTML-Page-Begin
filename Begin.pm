@@ -42,7 +42,7 @@ sub new {
 	}
 
 	# Check to 'CSS::Struct' object.
-	if (! $self->{'css'} || ! $self->{'css'}->isa('CSS::Struct::Output')) {
+	if ($self->{'css'} && ! $self->{'css'}->isa('CSS::Struct::Output')) {
 		err "Parameter 'css' must be a 'CSS::Struct::Output::*' class.";
 	}
 
@@ -85,28 +85,6 @@ sub process {
 	return;
 }
 
-sub process_css {
-	my $self = shift;
-
-	# Create styles.
-	$self->{'css'}->put(
-		['s', '.okay'],
-		['d', 'background', '#9f9'],
-		['e'],
-		['s', '.warning'],
-		['d', 'background', '#ff9'],
-		['e'],
-		['s', '.alert'],
-		['d', 'background', '#f99'],
-		['e'],
-		['s', '.offline'],
-		['d', 'color', '#999'],
-		['e'],
-	);
-
-	return;
-}
-
 1;
 
 __END__
@@ -125,7 +103,6 @@ Tags::HTML::Page::Begin - Tags helper for HTML page begin.
 
  my $obj = Tags::HTML::Page::Begin->new(%params);
  $obj->process;
- $obj->process_css;
 
 =head1 METHODS
 
@@ -177,15 +154,6 @@ Process Tags structure for output.
 
 Returns undef.
 
-=head2 C<process_css>
-
- $obj->process_css;
-
-Process CSS::Struct structure for output.
-This processing must be before L<process>, because in L<process> is output used.
-
-Returns undef.
-
 =head1 ERRORS
 
  new():
@@ -219,7 +187,12 @@ Returns undef.
  );
 
  # Process page
- $begin->process_css;
+ $css->put(
+        ['s', 'div'],
+	['d', 'color', 'red'],
+	['d', 'background-color', 'black'],
+	['e'],
+ );
  $begin->process;
  $tags->put(
         ['b', 'div'],
@@ -240,17 +213,9 @@ Returns undef.
  #       Page title
  #     </title>
  #     <style type="text/css">
- # .okay {
- # 	background: #9f9;
- # }
- # .warning {
- # 	background: #ff9;
- # }
- # .alert {
- # 	background: #f99;
- # }
- # .offline {
- # 	color: #999;
+ # div {
+ # 	color: red;
+ # 	background-color: black;
  # }
  # </style>
  #   </head>

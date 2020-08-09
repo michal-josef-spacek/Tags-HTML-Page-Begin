@@ -23,7 +23,12 @@ my $end = Tags::HTML::Page::End->new(
 );
 
 # Process page
-$begin->process_css;
+$css->put(
+       ['s', 'div'],
+['d', 'color', 'red'],
+['d', 'background-color', 'black'],
+['e'],
+);
 $begin->process;
 $tags->put(
        ['b', 'div'],
@@ -44,17 +49,9 @@ print $tags->flush;
 #       Page title
 #     </title>
 #     <style type="text/css">
-# .okay {
-# 	background: #9f9;
-# }
-# .warning {
-# 	background: #ff9;
-# }
-# .alert {
-# 	background: #f99;
-# }
-# .offline {
-# 	color: #999;
+# div {
+# 	color: red;
+# 	background-color: black;
 # }
 # </style>
 #   </head>

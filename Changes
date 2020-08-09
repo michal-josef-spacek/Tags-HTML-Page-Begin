@@ -1,5 +1,6 @@
 0.03
  - Add XML mode of Tags to EXAMPLE section in doc.
+ - Remove process_css() method, we don't need build-in css.
 
 0.02 2020-08-09T14:47:20+02:00
  - Fix DEPENDENCIES section in doc.

@@ -6,7 +6,6 @@ SYNOPSIS
 
      my $obj = Tags::HTML::Page::Begin->new(%params);
      $obj->process;
-     $obj->process_css;
 
 METHODS
   "new"
@@ -50,14 +49,6 @@ METHODS
 
     Returns undef.
 
-  "process_css"
-     $obj->process_css;
-
-    Process CSS::Struct structure for output. This processing must be before
-    process, because in process is output used.
-
-    Returns undef.
-
 ERRORS
      new():
             Parameter 'css' must be a 'CSS::Struct::Output::*' class.
@@ -89,7 +80,12 @@ EXAMPLE1
      );
 
      # Process page
-     $begin->process_css;
+     $css->put(
+            ['s', 'div'],
+            ['d', 'color', 'red'],
+            ['d', 'background-color', 'black'],
+            ['e'],
+     );
      $begin->process;
      $tags->put(
             ['b', 'div'],
@@ -110,17 +106,9 @@ EXAMPLE1
      #       Page title
      #     </title>
      #     <style type="text/css">
-     # .okay {
-     #      background: #9f9;
-     # }
-     # .warning {
-     #      background: #ff9;
-     # }
-     # .alert {
-     #      background: #f99;
-     # }
-     # .offline {
-     #      color: #999;
+     # div {
+     #      color: red;
+     #      background-color: black;
      # }
      # </style>
      #   </head>
