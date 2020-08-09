@@ -131,7 +131,7 @@ Tags::HTML::Page::Begin - Tags helper for HTML page begin.
 
 =head2 C<new>
 
- my $obj = Tags::HTML::Stars->new(%params);
+ my $obj = Tags::HTML::Page::Begin->new(%params);
 
 Constructor.
 

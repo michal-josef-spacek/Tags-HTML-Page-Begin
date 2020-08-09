@@ -10,7 +10,7 @@ SYNOPSIS
 
 METHODS
   "new"
-     my $obj = Tags::HTML::Stars->new(%params);
+     my $obj = Tags::HTML::Page::Begin->new(%params);
 
     Constructor.
 
