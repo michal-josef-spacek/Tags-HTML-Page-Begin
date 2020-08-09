@@ -54,7 +54,10 @@ sub new {
 sub process {
 	my $self = shift;
 
-	my $css = $self->{'css'}->flush."\n";
+	my $css;
+	if ($self->{'css'}) {
+		$css = $self->{'css'}->flush."\n";
+	}
 
 	# Begin of page.
 	$self->{'tags'}->put(
