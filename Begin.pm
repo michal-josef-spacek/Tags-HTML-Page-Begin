@@ -189,6 +189,8 @@ Returns undef.
 =head1 ERRORS
 
  new():
+        Parameter 'css' must be a 'CSS::Struct::Output::*' class.
+        Parameter 'tags' must be a 'Tags::Output::*' class.
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
 
