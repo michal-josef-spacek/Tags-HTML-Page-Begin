@@ -116,12 +116,6 @@ Constructor.
 
 =over 8
 
-=item * C<doctype>
-
-Document doctype string.
-
-Default value is '<!DOCTYPE html>'.
-
 =item * C<css>
 
 'CSS::Struct::Output' object for L<process_css> processing.
@@ -129,6 +123,12 @@ Default value is '<!DOCTYPE html>'.
 It's required.
 
 Default value is undef.
+
+=item * C<doctype>
+
+Document doctype string.
+
+Default value is '<!DOCTYPE html>'.
 
 =item * C<lang>
 
