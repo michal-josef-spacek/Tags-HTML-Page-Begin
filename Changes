@@ -1,4 +1,4 @@
-0.05
+0.05 2020-08-11T22:13:45+02:00
  - Add tests for process() method.
  - Fix ERRORS section in doc.
  - Sort constructor parameters in doc.
