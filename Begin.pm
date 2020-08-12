@@ -21,17 +21,41 @@ sub new {
 	# Create object.
 	my $self = bless {}, $class;
 
+	# Application name.
+	$self->{'application-name'} = undef;
+
+	# Author.
+	$self->{'author'} = undef;
+
 	# 'CSS::Struct' object.
 	$self->{'css'} = undef;
+
+	# Charset.
+	$self->{'charset'} = 'UTF-8';
+
+	# Description.
+	$self->{'description'} = undef;
 
 	# Doctype.
 	$self->{'doctype'} = '<!DOCTYPE html>';
 
+	# Generator.
+	$self->{'generator'} = 'Perl module: '.__PACKAGE__.', Version: '.$VERSION;
+
+	# Keywords.
+	$self->{'keywords'} = undef;
+
 	# Languages.
 	$self->{'lang'} = \%LANG;
 
+	# Refresh.
+	$self->{'refresh'} = undef;
+
 	# 'Tags' object.
 	$self->{'tags'} = undef;
+
+	# Viewport.
+	$self->{'viewport'} = undef;
 
 	# Process params.
 	set_params($self, @params);
@@ -70,7 +94,30 @@ sub process {
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
 		['e', 'meta'],
+	);
+	if (defined $self->{'charset'}) {
+		$self->{'tags'}->put(
+			['b', 'meta'],
+			['a', 'charset', $self->{'charset'}],
+			['e', 'meta'],
+		);
+	}
+	$self->_meta('application-name');
+	$self->_meta('author');
+	$self->_meta('description');
+	$self->_meta('generator');
+	$self->_meta('keywords');
+	$self->_meta('viewport');
+	if (defined $self->{'refresh'}) {
+		$self->{'tags'}->put(
+			['b', 'meta'],
+			['a', 'http-equiv', 'refresh'],
+			['a', 'content', $self->{'refresh'}],
+			['e', 'meta'],
+		);
+	}
 
+	$self->{'tags'}->put(
 		['b', 'title'],
 		['d', $self->{'lang'}->{'title'}],
 		['e', 'title'],
@@ -86,6 +133,23 @@ sub process {
 
 		['e', 'head'],
 		['b', 'body'],
+	);
+
+	return;
+}
+
+sub _meta {
+	my ($self, $key) = @_;
+
+	if (! defined $self->{$key}) {
+		return;
+	}
+
+	$self->{'tags'}->put(
+		['b', 'meta'],
+		['a', 'name', $key],
+		['a', 'content', $self->{$key}],
+		['e', 'meta'],
 	);
 
 	return;
@@ -120,11 +184,35 @@ Constructor.
 
 =over 8
 
+=item * C<application-name>
+
+Application name.
+
+Default name is undef.
+
+=item * C<author>
+
+Author name.
+
+Default value is undef.
+
 =item * C<css>
 
 'CSS::Struct::Output' object for L<process_css> processing.
 
 It's required.
+
+Default value is undef.
+
+=item * C<charset>
+
+Document character set.
+
+Default value is 'UTF-8'.
+
+=item * C<description>
+
+Document description.
 
 Default value is undef.
 
@@ -134,6 +222,18 @@ Document doctype string.
 
 Default value is '<!DOCTYPE html>'.
 
+=item * C<generator>
+
+Generator value.
+
+Default value is 'Perl module: Tags::HTML::Page::Begin, Version: __MODULE_VERSION__'.
+
+=item * C<keywords>
+
+Document keywords.
+
+Default value is undef.
+
 =item * C<lang>
 
 Hash with language information for output.
@@ -142,11 +242,23 @@ Keys are: 'title'.
 Default value is reference to hash with these value:
  'title' => 'Page title'
 
+=item * C<refresh>
+
+Page refresh time in seconds.
+
+Default value is undef.
+
 =item * C<tags>
 
 'Tags::Output' object.
 
 It's required.
+
+Default value is undef.
+
+=item * C<viewport>
+
+Document viewport.
 
 Default value is undef.
 
