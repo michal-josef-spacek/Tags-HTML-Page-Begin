@@ -1,5 +1,5 @@
 ---
-abstract: 'Tags helpers for HTML page begin.'
+abstract: 'Tags helper for HTML page begin.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
