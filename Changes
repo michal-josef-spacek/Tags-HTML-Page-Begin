@@ -1,5 +1,6 @@
 0.06
  - Add multiple meta elements to header.
+ - Add script_js and script_js_src constructor parameters.
  - Add spaces to code in head element.
  - Fix module description.
  - Fix 'css' constructor parameter requirements in doc.

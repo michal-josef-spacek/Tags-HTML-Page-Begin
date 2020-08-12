@@ -51,6 +51,12 @@ sub new {
 	# Refresh.
 	$self->{'refresh'} = undef;
 
+	# Script js code.
+	$self->{'script_js'} = [];
+
+	# Script js sources.
+	$self->{'script_js_src'} = [];
+
 	# 'Tags' object.
 	$self->{'tags'} = undef;
 
@@ -68,6 +74,16 @@ sub new {
 	# Check to 'CSS::Struct' object.
 	if ($self->{'css'} && ! $self->{'css'}->isa('CSS::Struct::Output')) {
 		err "Parameter 'css' must be a 'CSS::Struct::Output::*' class.";
+	}
+
+	# Check for 'script_js' array.
+	if ($self->{'script_js'} && ref $self->{'script_js'} ne 'ARRAY') {
+		err "Parameter 'script_js' must be a array.";
+	}
+
+	# Check for 'script_js_src' array.
+	if ($self->{'script_js_src'} && ref $self->{'script_js_src'} ne 'ARRAY') {
+		err "Parameter 'script_js_src' must be a array.";
 	}
 
 	# Object.
@@ -115,6 +131,27 @@ sub process {
 			['a', 'content', $self->{'refresh'}],
 			['e', 'meta'],
 		);
+	}
+
+	if (@{$self->{'script_js'}}) {
+		foreach my $script_js (@{$self->{'script_js'}}) {
+			$self->{'tags'}->put(
+				['b', 'script'],
+				['a', 'type', 'text/javascript'],
+				['d', $script_js],
+				['e', 'script'],
+			);
+		}
+	}
+	if (@{$self->{'script_js_src'}}) {
+		foreach my $script_js_src (@{$self->{'script_js_src'}}) {
+			$self->{'tags'}->put(
+				['b', 'script'],
+				['a', 'type', 'text/javascript'],
+				['a', 'src', $script_js_src],
+				['e', 'script'],
+			);
+		}
 	}
 
 	$self->{'tags'}->put(
@@ -246,6 +283,18 @@ Page refresh time in seconds.
 
 Default value is undef.
 
+=item * C<script_js>
+
+List of JavaScript scripts.
+
+Default value is reference to blank array.
+
+=item * C<script_js_src>
+
+List of JavaScript links.
+
+Default value is reference to blank array.
+
 =item * C<tags>
 
 'Tags::Output' object.
@@ -274,6 +323,8 @@ Returns undef.
 
  new():
          Parameter 'css' must be a 'CSS::Struct::Output::*' class.
+         Parameter 'script_js' must be a array.
+         Parameter 'script_js_src' must be a array.
          Parameter 'tags' must be a 'Tags::Output::*' class.
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
