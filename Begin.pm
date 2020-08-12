@@ -65,13 +65,16 @@ sub process {
 		['r', "\n"],
 		['b', 'html'],
 		['b', 'head'],
+
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
 		['e', 'meta'],
+
 		['b', 'title'],
 		['d', $self->{'lang'}->{'title'}],
 		['e', 'title'],
+
 		(
 			$css ? (
 				['b', 'style'],
@@ -80,6 +83,7 @@ sub process {
 				['e', 'style'],
 			) : (),
 		),
+
 		['e', 'head'],
 		['b', 'body'],
 	);
