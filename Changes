@@ -2,6 +2,7 @@
  - Add multiple meta elements to header.
  - Add spaces to code in head element.
  - Fix module description.
+ - Fix 'css' constructor parameter requirements in doc.
 
 0.05 2020-08-11T22:13:45+02:00
  - Add tests for process() method.
