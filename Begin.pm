@@ -77,12 +77,12 @@ sub new {
 	}
 
 	# Check for 'script_js' array.
-	if ($self->{'script_js'} && ref $self->{'script_js'} ne 'ARRAY') {
+	if (ref $self->{'script_js'} ne 'ARRAY') {
 		err "Parameter 'script_js' must be a array.";
 	}
 
 	# Check for 'script_js_src' array.
-	if ($self->{'script_js_src'} && ref $self->{'script_js_src'} ne 'ARRAY') {
+	if (ref $self->{'script_js_src'} ne 'ARRAY') {
 		err "Parameter 'script_js_src' must be a array.";
 	}
 
