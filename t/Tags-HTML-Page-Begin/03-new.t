@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Page::Begin;
 use Tags::Output::Raw;
-use Test::More 'tests' => 6;
+use Test::More 'tests' => 8;
 use Test::NoWarnings;
 
 # Test.
@@ -59,5 +59,33 @@ is(
 	$EVAL_ERROR,
 	"Parameter 'css' must be a 'CSS::Struct::Output::*' class.\n",
 	"Bad 'CSS::Struct::Output' instance.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Page::Begin->new(
+		'script_js' => undef,
+		'tags' => Tags::Output::Raw->new,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'script_js' must be a array.\n",
+	"Parameter 'script_js' is undef.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Page::Begin->new(
+		'script_js' => 'foo',
+		'tags' => Tags::Output::Raw->new,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'script_js' must be a array.\n",
+	"Parameter 'script_js' is string.",
 );
 clean();
