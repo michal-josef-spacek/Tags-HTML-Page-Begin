@@ -1,4 +1,4 @@
-0.07
+0.07 2020-08-13T22:34:27+02:00
  - Add test for errors in 'script_js' constructor parameter.
  - Add test for errors in 'script_js_src' constructor parameter.
  - Change bugtracker to github.
