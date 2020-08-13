@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Page::Begin;
 use Tags::Output::Raw;
-use Test::More 'tests' => 8;
+use Test::More 'tests' => 10;
 use Test::NoWarnings;
 
 # Test.
@@ -87,5 +87,33 @@ is(
 	$EVAL_ERROR,
 	"Parameter 'script_js' must be a array.\n",
 	"Parameter 'script_js' is string.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Page::Begin->new(
+		'script_js_src' => undef,
+		'tags' => Tags::Output::Raw->new,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'script_js_src' must be a array.\n",
+	"Parameter 'script_js_src' is undef.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Page::Begin->new(
+		'script_js_src' => 'foo',
+		'tags' => Tags::Output::Raw->new,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'script_js_src' must be a array.\n",
+	"Parameter 'script_js_src' is string.",
 );
 clean();
