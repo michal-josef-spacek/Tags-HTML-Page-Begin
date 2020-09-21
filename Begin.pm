@@ -5,6 +5,7 @@ use warnings;
 
 use Class::Utils qw(set_params);
 use Error::Pure qw(err);
+use List::MoreUtils qw(none);
 use Readonly;
 
 # Constants.
@@ -33,6 +34,9 @@ sub new {
 
 	# 'CSS::Struct' object.
 	$self->{'css'} = undef;
+
+	# CSS links.
+	$self->{'css_src'} = [];
 
 	# Charset.
 	$self->{'charset'} = 'UTF-8';
@@ -84,6 +88,22 @@ sub new {
 	# Check to 'CSS::Struct' object.
 	if ($self->{'css'} && ! $self->{'css'}->isa('CSS::Struct::Output')) {
 		err "Parameter 'css' must be a 'CSS::Struct::Output::*' class.";
+	}
+
+	# Check for 'css_src' array.
+	if (ref $self->{'css_src'} ne 'ARRAY') {
+		err "Parameter 'css_src' must be a array.";
+	}
+	foreach my $css_src_hr (@{$self->{'css_src'}}) {
+		if (ref $css_src_hr ne 'HASH') {
+			err "Parameter 'css_src' must be a array of hash structures.";
+		}
+		foreach my $key (keys %{$css_src_hr}) {
+			if (none { $key eq $_ } qw(link media)) {
+				err "Parameter 'css_src' must be a array of hash ".
+					"structures with 'media' and 'link' keys."
+			}
+		}
 	}
 
 	# Check for 'script_js' array.
@@ -195,7 +215,22 @@ sub process {
 				['e', 'style'],
 			) : (),
 		),
-
+	);
+	if (@{$self->{'css_src'}}) {
+		foreach my $css_src_hr (@{$self->{'css_src'}}) {
+			$self->{'tags'}->put(
+				['b', 'link'],
+				['a', 'rel', 'stylesheet'],
+				['a', 'href', $css_src_hr->{'link'}],
+				$css_src_hr->{'media'} ? (
+					['a', 'media', $css_src_hr->{'media'}],
+				) : (),
+				['a', 'type', 'text/css'],
+				['e', 'link'],
+			);
+		}
+	}
+	$self->{'tags'}->put(
 		['e', 'head'],
 		['b', 'body'],
 	);
@@ -312,6 +347,18 @@ Default value is undef.
 
 Default value is undef.
 
+=item * C<css_src>
+
+List of CSS link structures.
+
+ Structure is something like:
+ {
+   'link' => '/foo.css',
+   'media' => 'screen',
+ }
+
+Default value is [].
+
 =item * C<charset>
 
 Document character set.
@@ -409,6 +456,9 @@ Returns undef.
 
  new():
          Parameter 'css' must be a 'CSS::Struct::Output::*' class.
+         Parameter 'css_src' must be a array.
+         Parameter 'css_src' must be a array of hash structures.
+         Parameter 'css_src' must be a array of hash structures with 'media' and 'link' keys.
          Parameter 'script_js' must be a array.
          Parameter 'script_js_src' must be a array.
          Parameter 'tags' must be a 'Tags::Output::*' class.
@@ -486,6 +536,7 @@ Returns undef.
 
 L<Class::Utils>,
 L<Error::Pure>,
+L<List::MoreUtils>,
 L<Readonly>.
 
 =head1 SEE ALSO

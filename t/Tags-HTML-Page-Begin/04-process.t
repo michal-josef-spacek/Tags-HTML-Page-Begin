@@ -4,7 +4,7 @@ use warnings;
 use CSS::Struct::Output::Raw;
 use Tags::HTML::Page::Begin;
 use Tags::Output::Structure;
-use Test::More 'tests' => 13;
+use Test::More 'tests' => 14;
 use Test::NoWarnings;
 
 # Test.
@@ -526,6 +526,65 @@ is_deeply(
 		['b', 'title'],
 		['d', 'Page title'],
 		['e', 'title'],
+
+		['e', 'head'],
+		['b', 'body'],
+	],
+	'Begin of page in default with PNG favicon.',
+);
+
+# Test.
+$obj = Tags::HTML::Page::Begin->new(
+	'css_src' => [
+		{ 'link' => 'foo.css', },
+		{
+			'link' => 'bar.css',
+			'media' => 'screen',
+		},
+	],
+	'tags' => $tags,
+);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['r', '<!DOCTYPE html>'],
+		['r', "\n"],
+		['b', 'html'],
+		['b', 'head'],
+
+		['b', 'meta'],
+		['a', 'http-equiv', 'Content-Type'],
+		['a', 'content', 'text/html; charset=UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'charset', 'UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'name', 'generator'],
+		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
+			$Tags::HTML::Page::Begin::VERSION],
+		['e', 'meta'],
+
+		['b', 'title'],
+		['d', 'Page title'],
+		['e', 'title'],
+
+		['b', 'link'],
+		['a', 'rel', 'stylesheet'],
+		['a', 'href', 'foo.css'],
+		['a', 'type', 'text/css'],
+		['e', 'link'],
+
+		['b', 'link'],
+		['a', 'rel', 'stylesheet'],
+		['a', 'href', 'bar.css'],
+		['a', 'media', 'screen'],
+		['a', 'type', 'text/css'],
+		['e', 'link'],
 
 		['e', 'head'],
 		['b', 'body'],

@@ -30,6 +30,7 @@ no_index:
 requires:
   Class::Utils: 0.02
   Error::Pure: 0.07
+  List::MoreUtils: 0
   Readonly: 0
   perl: 5.8.0
 resources:
