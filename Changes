@@ -1,5 +1,6 @@
 0.08
  - Add base element to header.
+ - Add robots meta.
 
 0.07 2020-08-13T22:34:27+02:00
  - Add test for errors in 'script_js' constructor parameter.

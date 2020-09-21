@@ -55,6 +55,9 @@ sub new {
 	# Refresh.
 	$self->{'refresh'} = undef;
 
+	# Robots.
+	$self->{'robots'} = undef;
+
 	# Script js code.
 	$self->{'script_js'} = [];
 
@@ -137,6 +140,7 @@ sub process {
 	$self->_meta('description');
 	$self->_meta('generator');
 	$self->_meta('keywords');
+	$self->_meta('robots');
 	$self->_meta('viewport');
 	if (defined $self->{'refresh'}) {
 		$self->{'tags'}->put(
@@ -307,6 +311,12 @@ Default value is reference to hash with these value:
 =item * C<refresh>
 
 Page refresh time in seconds.
+
+Default value is undef.
+
+=item * C<robots>
+
+Robots meta.
 
 Default value is undef.
 
