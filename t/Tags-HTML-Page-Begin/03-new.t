@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use Tags::HTML::Page::Begin;
 use Tags::Output::Raw;
-use Test::More 'tests' => 10;
+use Test::More 'tests' => 11;
 use Test::NoWarnings;
 
 # Test.
@@ -115,5 +115,19 @@ is(
 	$EVAL_ERROR,
 	"Parameter 'script_js_src' must be a array.\n",
 	"Parameter 'script_js_src' is string.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Page::Begin->new(
+		'favicon' => 'foo.bmp',
+		'tags' => Tags::Output::Raw->new,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'favicon' contain bad image type.\n",
+	"Parameter 'favicon' contain bad image type.",
 );
 clean();

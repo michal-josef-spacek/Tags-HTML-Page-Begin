@@ -43,6 +43,9 @@ sub new {
 	# Doctype.
 	$self->{'doctype'} = '<!DOCTYPE html>';
 
+	# Favicon.
+	$self->{'favicon'} = undef;
+
 	# Generator.
 	$self->{'generator'} = 'Perl module: '.__PACKAGE__.', Version: '.$VERSION;
 
@@ -91,6 +94,11 @@ sub new {
 	# Check for 'script_js_src' array.
 	if (ref $self->{'script_js_src'} ne 'ARRAY') {
 		err "Parameter 'script_js_src' must be a array.";
+	}
+
+	# Check for favicon.
+	if (defined $self->{'favicon'} && $self->{'favicon'} !~ m/\.(ico|png|jpg|gif|svg)$/ms) {
+		err "Parameter 'favicon' contain bad image type.";
 	}
 
 	# Object.
@@ -151,6 +159,8 @@ sub process {
 		);
 	}
 
+	$self->_favicon;
+
 	if (@{$self->{'script_js'}}) {
 		foreach my $script_js (@{$self->{'script_js'}}) {
 			$self->{'tags'}->put(
@@ -188,6 +198,38 @@ sub process {
 
 		['e', 'head'],
 		['b', 'body'],
+	);
+
+	return;
+}
+
+sub _favicon {
+	my $self = shift;
+
+	if (! defined $self->{'favicon'}) {
+		return;
+	}
+
+	my ($suffix) = $self->{'favicon'} =~ m/\.(ico|png|jpg|gif|svg)$/ms;
+	my $image_type;
+	if ($suffix eq 'ico') {
+		$image_type = 'image/vnd.microsoft.icon';
+	} elsif ($suffix eq 'png') {
+		$image_type = 'image/png';
+	} elsif ($suffix eq 'svg') {
+		$image_type = 'image/svg+xml';
+	} elsif ($suffix eq 'gif') {
+		$image_type = 'image/gif';
+	} else {
+		$image_type = 'image/jpeg';
+	}
+
+	$self->{'tags'}->put(
+		['b', 'link'],
+		['a', 'rel', 'icon'],
+		['a', 'href', $self->{'favicon'}],
+		['a', 'type', $image_type],
+		['e', 'link'],
 	);
 
 	return;
@@ -287,6 +329,13 @@ Default value is undef.
 Document doctype string.
 
 Default value is '<!DOCTYPE html>'.
+
+=item * C<favicon>
+
+Favorite icon image link.
+Supported images are 'ICO', 'PNG', 'GIF', 'SVG' and 'JPG' files.
+
+Default value is undef.
 
 =item * C<generator>
 
