@@ -27,6 +27,10 @@ sub new {
 	# Author.
 	$self->{'author'} = undef;
 
+	# Base element.
+	$self->{'base_href'} = undef;
+	$self->{'base_target'} = undef;
+
 	# 'CSS::Struct' object.
 	$self->{'css'} = undef;
 
@@ -111,6 +115,16 @@ sub process {
 		['a', 'content', 'text/html; charset=UTF-8'],
 		['e', 'meta'],
 	);
+	if (defined $self->{'base_href'}) {
+		$self->{'tags'}->put(
+			['b', 'base'],
+			['a', 'href', $self->{'base_href'}],
+			defined $self->{'base_target'} ? (
+				['a', 'target', $self->{'base_target'}],
+			) : (),
+			['e', 'base'],
+		);
+	}
 	if (defined $self->{'charset'}) {
 		$self->{'tags'}->put(
 			['b', 'meta'],
@@ -230,6 +244,19 @@ Default name is undef.
 =item * C<author>
 
 Author name.
+
+Default value is undef.
+
+=item * C<base_href>
+
+Base link (<base href="https://skim.cz" />.
+
+Default value is undef.
+
+=item * C<base_target>
+
+Base target.
+It's used in if 'base_href' parameter exists.
 
 Default value is undef.
 
