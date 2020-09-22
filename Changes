@@ -1,4 +1,4 @@
-0.09
+0.09 2020-09-22T13:41:24+02:00
  - Add RSS link.
  - Fix EXAMPLE section in doc.
  - If processing css, reset internal state.
