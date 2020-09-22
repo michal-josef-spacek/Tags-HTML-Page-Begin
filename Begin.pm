@@ -65,6 +65,9 @@ sub new {
 	# Robots.
 	$self->{'robots'} = undef;
 
+	# RSS
+	$self->{'rss'} = undef;
+
 	# Script js code.
 	$self->{'script_js'} = [];
 
@@ -230,6 +233,18 @@ sub process {
 			);
 		}
 	}
+
+	if (defined $self->{'rss'}) {
+		$self->{'tags'}->put(
+			['b', 'link'],
+			['a', 'rel', 'alternate'],
+			['a', 'type', 'application/rss+xml'],
+			['a', 'title', 'RSS'],
+			['a', 'href', $self->{'rss'}],
+			['e', 'link'],
+		);
+	}
+
 	$self->{'tags'}->put(
 		['e', 'head'],
 		['b', 'body'],
@@ -413,6 +428,12 @@ Default value is undef.
 =item * C<robots>
 
 Robots meta.
+
+Default value is undef.
+
+=item * C<rss>
+
+RSS link.
 
 Default value is undef.
 
