@@ -1,4 +1,5 @@
 0.09
+ - If processing css, reset internal state.
 
 0.08 2020-09-21T22:47:58+02:00
  - Add base element to header.

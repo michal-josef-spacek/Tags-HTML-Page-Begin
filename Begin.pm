@@ -131,7 +131,7 @@ sub process {
 
 	my $css;
 	if ($self->{'css'}) {
-		$css = $self->{'css'}->flush."\n";
+		$css = $self->{'css'}->flush(1)."\n";
 	}
 
 	# Begin of page.
