@@ -4,7 +4,7 @@ use warnings;
 use CSS::Struct::Output::Raw;
 use Tags::HTML::Page::Begin;
 use Tags::Output::Structure;
-use Test::More 'tests' => 15;
+use Test::More 'tests' => 17;
 use Test::NoWarnings;
 
 # Test.
@@ -637,4 +637,110 @@ is_deeply(
 		['b', 'body'],
 	],
 	'Begin of page in default with RSS.',
+);
+
+# Test.
+$obj = Tags::HTML::Page::Begin->new(
+	'script_js' => [
+		'foo();',
+		'bar();',
+	],
+	'tags' => $tags,
+);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['r', '<!DOCTYPE html>'],
+		['r', "\n"],
+		['b', 'html'],
+		['b', 'head'],
+
+		['b', 'meta'],
+		['a', 'http-equiv', 'Content-Type'],
+		['a', 'content', 'text/html; charset=UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'charset', 'UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'name', 'generator'],
+		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
+			$Tags::HTML::Page::Begin::VERSION],
+		['e', 'meta'],
+
+		['b', 'script'],
+		['a', 'type', 'text/javascript'],
+		['d', 'foo();'],
+		['e', 'script'],
+
+		['b', 'script'],
+		['a', 'type', 'text/javascript'],
+		['d', 'bar();'],
+		['e', 'script'],
+
+		['b', 'title'],
+		['d', 'Page title'],
+		['e', 'title'],
+
+		['e', 'head'],
+		['b', 'body'],
+	],
+	'Begin of page in default with script JS.',
+);
+
+# Test.
+$obj = Tags::HTML::Page::Begin->new(
+	'script_js_src' => [
+		'https://example.com/js/foo.js',
+		'https://example.com/js/bar.js',
+	],
+	'tags' => $tags,
+);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['r', '<!DOCTYPE html>'],
+		['r', "\n"],
+		['b', 'html'],
+		['b', 'head'],
+
+		['b', 'meta'],
+		['a', 'http-equiv', 'Content-Type'],
+		['a', 'content', 'text/html; charset=UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'charset', 'UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'name', 'generator'],
+		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
+			$Tags::HTML::Page::Begin::VERSION],
+		['e', 'meta'],
+
+		['b', 'script'],
+		['a', 'type', 'text/javascript'],
+		['a', 'src', 'https://example.com/js/foo.js'],
+		['e', 'script'],
+
+		['b', 'script'],
+		['a', 'type', 'text/javascript'],
+		['a', 'src', 'https://example.com/js/bar.js'],
+		['e', 'script'],
+
+		['b', 'title'],
+		['d', 'Page title'],
+		['e', 'title'],
+
+		['e', 'head'],
+		['b', 'body'],
+	],
+	'Begin of page in default with script JS links.',
 );
