@@ -4,7 +4,7 @@ use warnings;
 use CSS::Struct::Output::Raw;
 use Tags::HTML::Page::Begin;
 use Tags::Output::Structure;
-use Test::More 'tests' => 18;
+use Test::More 'tests' => 19;
 use Test::NoWarnings;
 
 # Test.
@@ -29,10 +29,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -51,7 +47,43 @@ is_deeply(
 # Test.
 $tags = Tags::Output::Structure->new;
 $obj = Tags::HTML::Page::Begin->new(
-	'charset' => undef,
+	'http_equiv_content_type' => undef,
+	'tags' => $tags,
+);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['r', '<!DOCTYPE html>'],
+		['r', "\n"],
+		['b', 'html'],
+		['a', 'lang', 'en'],
+		['b', 'head'],
+
+		['b', 'meta'],
+		['a', 'charset', 'UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'name', 'generator'],
+		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
+			$Tags::HTML::Page::Begin::VERSION],
+		['e', 'meta'],
+
+		['b', 'title'],
+		['d', 'Page title'],
+		['e', 'title'],
+
+		['e', 'head'],
+		['b', 'body'],
+	],
+	'Begin of page with default without http-equiv content-type.',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Page::Begin->new(
 	'generator' => undef,
 	'tags' => $tags,
 );
@@ -78,14 +110,13 @@ is_deeply(
 		['e', 'head'],
 		['b', 'body'],
 	],
-	'Begin of page without charset and generator and without CSS.',
+	'Begin of page without generator and without CSS.',
 );
 
 # Test.
 my $css = CSS::Struct::Output::Raw->new;
 $obj = Tags::HTML::Page::Begin->new(
 	'css' => $css,
-	'charset' => undef,
 	'generator' => undef,
 	'tags' => $tags,
 );
@@ -148,10 +179,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -198,10 +225,6 @@ is_deeply(
 		['e', 'base'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -245,10 +268,6 @@ is_deeply(
 		['e', 'base'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -283,10 +302,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -329,10 +344,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -379,10 +390,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -423,10 +430,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -473,10 +476,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -517,10 +516,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -570,10 +565,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -627,10 +618,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -675,10 +662,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],
@@ -732,10 +715,6 @@ is_deeply(
 		['e', 'meta'],
 
 		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
 		['a', 'name', 'generator'],
 		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
 			$Tags::HTML::Page::Begin::VERSION],
@@ -780,10 +759,6 @@ is_deeply(
 		['b', 'meta'],
 		['a', 'http-equiv', 'Content-Type'],
 		['a', 'content', 'text/html; charset=UTF-8'],
-		['e', 'meta'],
-
-		['b', 'meta'],
-		['a', 'charset', 'UTF-8'],
 		['e', 'meta'],
 
 		['b', 'meta'],

@@ -1,6 +1,8 @@
 0.10
  - Add HTML element lang attribute.
  - Add tests for script_js and script_js_src.
+ - Fix situation with <meta http-equiv="Content-Type" .../> and <meta
+   charset=..../> in same time. Added 'http_equiv_content_type' parameter.
  - Update README file.
 
 0.09 2020-09-22T13:41:24+02:00
