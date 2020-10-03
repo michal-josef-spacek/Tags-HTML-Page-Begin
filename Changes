@@ -1,6 +1,7 @@
 0.10
  - Add HTML element lang attribute.
  - Add tests for script_js and script_js_src.
+ - Update README file.
 
 0.09 2020-09-22T13:41:24+02:00
  - Add RSS link.

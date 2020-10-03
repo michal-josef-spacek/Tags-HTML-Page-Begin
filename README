@@ -119,6 +119,12 @@ METHODS
 
             Default value is undef.
 
+    *       "rss"
+
+            RSS link.
+
+            Default value is undef.
+
     *       "script_js"
 
             List of JavaScript scripts.
