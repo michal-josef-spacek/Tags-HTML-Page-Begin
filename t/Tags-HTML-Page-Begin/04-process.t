@@ -4,7 +4,7 @@ use warnings;
 use CSS::Struct::Output::Raw;
 use Tags::HTML::Page::Begin;
 use Tags::Output::Structure;
-use Test::More 'tests' => 17;
+use Test::More 'tests' => 18;
 use Test::NoWarnings;
 
 # Test.
@@ -20,6 +20,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -62,6 +63,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -100,6 +102,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -136,6 +139,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -181,6 +185,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -226,6 +231,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -271,6 +277,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -316,6 +323,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -362,6 +370,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -408,6 +417,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -454,6 +464,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -500,6 +511,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -552,6 +564,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -605,6 +618,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -655,6 +669,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -708,6 +723,7 @@ is_deeply(
 		['r', '<!DOCTYPE html>'],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', 'en'],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -743,4 +759,45 @@ is_deeply(
 		['b', 'body'],
 	],
 	'Begin of page in default with script JS links.',
+);
+
+# Test.
+$obj = Tags::HTML::Page::Begin->new(
+	'html_lang' => 'cs',
+	'tags' => $tags,
+);
+$obj->process;
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['r', '<!DOCTYPE html>'],
+		['r', "\n"],
+		['b', 'html'],
+		['a', 'lang', 'cs'],
+		['b', 'head'],
+
+		['b', 'meta'],
+		['a', 'http-equiv', 'Content-Type'],
+		['a', 'content', 'text/html; charset=UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'charset', 'UTF-8'],
+		['e', 'meta'],
+
+		['b', 'meta'],
+		['a', 'name', 'generator'],
+		['a', 'content', 'Perl module: Tags::HTML::Page::Begin, Version: '.
+			$Tags::HTML::Page::Begin::VERSION],
+		['e', 'meta'],
+
+		['b', 'title'],
+		['d', 'Page title'],
+		['e', 'title'],
+
+		['e', 'head'],
+		['b', 'body'],
+	],
+	'Begin of page in default with html lang attribute.',
 );

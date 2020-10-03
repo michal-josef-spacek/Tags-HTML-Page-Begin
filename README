@@ -87,6 +87,13 @@ METHODS
             Default value is 'Perl module: Tags::HTML::Page::Begin, Version:
             __MODULE_VERSION__'.
 
+    *       "html_lang"
+
+            HTML element lang attribute. Creates html element in form: <html
+            lang="en">
+
+            Default value is 'en'.
+
     *       "keywords"
 
             Document keywords.
@@ -200,7 +207,7 @@ EXAMPLE1
 
      # Output:
      # <!DOCTYPE html>
-     # <html>
+     # <html lang="en">
      #   <head>
      #     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
      #     <meta charset="UTF-8" />

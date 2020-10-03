@@ -53,6 +53,9 @@ sub new {
 	# Generator.
 	$self->{'generator'} = 'Perl module: '.__PACKAGE__.', Version: '.$VERSION;
 
+	# HTML element lang attribute.
+	$self->{'html_lang'} = 'en';
+
 	# Keywords.
 	$self->{'keywords'} = undef;
 
@@ -142,6 +145,7 @@ sub process {
 		['r', $self->{'doctype'}],
 		['r', "\n"],
 		['b', 'html'],
+		['a', 'lang', $self->{'html_lang'}],
 		['b', 'head'],
 
 		['b', 'meta'],
@@ -405,6 +409,13 @@ Generator value.
 
 Default value is 'Perl module: Tags::HTML::Page::Begin, Version: __MODULE_VERSION__'.
 
+=item * C<html_lang>
+
+HTML element lang attribute.
+Creates html element in form: <html lang="en">
+
+Default value is 'en'.
+
 =item * C<keywords>
 
 Document keywords.
@@ -530,7 +541,7 @@ Returns undef.
 
  # Output:
  # <!DOCTYPE html>
- # <html>
+ # <html lang="en">
  #   <head>
  #     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  #     <meta charset="UTF-8" />
