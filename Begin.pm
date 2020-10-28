@@ -145,7 +145,12 @@ sub process {
 
 	my $css;
 	if ($self->{'css'}) {
-		$css = $self->{'css'}->flush(1)."\n";
+		$css = $self->{'css'}->flush(1);
+		if ($css ne '') {
+			$css .= "\n";
+		} else {
+			undef $css;
+		}
 	}
 
 	# Begin of page.
@@ -228,7 +233,7 @@ sub process {
 		['e', 'title'],
 
 		(
-			$css ? (
+			defined $css ? (
 				['b', 'style'],
 				['a', 'type', 'text/css'],
 				['d', $css],
