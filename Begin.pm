@@ -228,9 +228,11 @@ sub process {
 	}
 
 	$self->{'tags'}->put(
-		['b', 'title'],
-		['d', $self->{'lang'}->{'title'}],
-		['e', 'title'],
+		defined $self->{'lang'}->{'title'} ? (
+			['b', 'title'],
+			['d', $self->{'lang'}->{'title'}],
+			['e', 'title'],
+		) : (),
 
 		(
 			defined $css ? (
