@@ -808,7 +808,7 @@ is_deeply(
 		['e', 'head'],
 		['b', 'body'],
 	],
-	'Begin of page without charset and generator and with blank CSS.',
+	'Begin of page without generator and with blank CSS.',
 );
 
 # Test.
