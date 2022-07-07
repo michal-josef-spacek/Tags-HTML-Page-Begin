@@ -1,4 +1,6 @@
 0.13
+ - Add 'width=device-width, initial-scale=1.0' to viewport as default
+   value.
 
 0.12 2022-02-27T18:15:11+01:00
  - Fix test comment.
