@@ -13,7 +13,7 @@ Readonly::Hash my %LANG => (
 	'title' => 'Page title',
 );
 
-our $VERSION = 0.14;
+our $VERSION = 0.15;
 
 # Constructor.
 sub new {
@@ -644,6 +644,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.14
+0.15
 
 =cut
