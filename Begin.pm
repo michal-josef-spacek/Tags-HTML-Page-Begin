@@ -584,13 +584,13 @@ Returns undef.
  # Print out.
  print $tags->flush;
 
- # Output:
+ # Output like:
  # <!DOCTYPE html>
  # <html lang="en">
  #   <head>
  #     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  #     <meta name="generator" content=
- #       "Perl module: Tags::HTML::Page::Begin, Version: 0.06" />
+ #       "Perl module: Tags::HTML::Page::Begin, Version: 0.15" />
  #     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  #     <title>
  #       Page title
@@ -599,6 +599,11 @@ Returns undef.
  # div {
  # 	color: red;
  # 	background-color: black;
+ # }
+ # * {
+ # 	box-sizing: border-box;
+ # 	margin: 0;
+ # 	padding: 0;
  # }
  # </style>
  #   </head>
