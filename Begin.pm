@@ -35,6 +35,15 @@ sub new {
 	# 'CSS::Struct' object.
 	$self->{'css'} = undef;
 
+	# Init CSS style.
+	$self->{'css_init'} = [
+		['s', '*'],
+		['d', 'box-sizing', 'border-box'],
+		['d', 'margin', 0],
+		['d', 'padding', 0],
+		['e'],
+	];
+
 	# CSS links.
 	$self->{'css_src'} = [];
 
@@ -145,6 +154,9 @@ sub process {
 
 	my $css;
 	if ($self->{'css'}) {
+		$self->{'css'}->put(
+			@{$self->{'css_init'}},
+		);
 		$css = $self->{'css'}->flush(1);
 		if ($css ne '') {
 			$css .= "\n";
