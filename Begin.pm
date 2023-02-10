@@ -389,6 +389,21 @@ Default value is undef.
 
 Default value is undef.
 
+=item * C<css_init>
+
+Initialization of CSS.
+
+Default value is:
+
+ * {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+ }
+
+CSS is handled by C<_process_css()> method in this module, which is abstract
+method of L<Tags::HTML>.
+
 =item * C<css_src>
 
 List of CSS link structures.

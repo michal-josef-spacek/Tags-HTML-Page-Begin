@@ -43,6 +43,21 @@ METHODS
 
             Default value is undef.
 
+    *       "css_init"
+
+            Initialization of CSS.
+
+            Default value is:
+
+             * {
+                     box-sizing: border-box;
+                     margin: 0;
+                     padding: 0;
+             }
+
+            CSS is handled by "_process_css()" method in this module, which
+            is abstract method of Tags::HTML.
+
     *       "css_src"
 
             List of CSS link structures.
