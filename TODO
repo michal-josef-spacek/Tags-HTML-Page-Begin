@@ -2,7 +2,6 @@ TODO
 ====
 5. Pridat xmlns atribut html elementu
 6. Udelat priklady pro xhtml a html verze.
-7. Rewrite to Tags::HTML.
 8. Could we move 'css_init' to begin of css?
 One possibility is use somthing like unshift() instead of put(). But we don't
 have.
@@ -23,3 +22,6 @@ OK [20200921] skim
 
 4. test coverage
 OK [20200922] skim
+
+7. Rewrite to Tags::HTML.
+OK [20230210] skim

@@ -1,9 +1,10 @@
 package Tags::HTML::Page::Begin;
 
+use base qw(Tags::HTML);
 use strict;
 use warnings;
 
-use Class::Utils qw(set_params);
+use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use List::MoreUtils qw(none);
 use Readonly;
@@ -20,7 +21,13 @@ sub new {
 	my ($class, @params) = @_;
 
 	# Create object.
-	my $self = bless {}, $class;
+	my ($object_params_ar, $other_params_ar) = split_params(
+		['application-name', 'author', 'base_href', 'base_target',
+		'css_init', 'css_src', 'charset', 'description', 'doctype',
+		'favicon', 'generator', 'html_lang', 'http_equiv_content_type',
+		'keywords', 'lang', 'refresh', 'robots', 'rss',
+		'script_js', 'script_js_src', 'viewport'], @params);
+	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# Application name.
 	$self->{'application-name'} = undef;
@@ -31,9 +38,6 @@ sub new {
 	# Base element.
 	$self->{'base_href'} = undef;
 	$self->{'base_target'} = undef;
-
-	# 'CSS::Struct' object.
-	$self->{'css'} = undef;
 
 	# Init CSS style.
 	$self->{'css_init'} = [
@@ -89,24 +93,11 @@ sub new {
 	# Script js sources.
 	$self->{'script_js_src'} = [];
 
-	# 'Tags' object.
-	$self->{'tags'} = undef;
-
 	# Viewport.
 	$self->{'viewport'} = 'width=device-width, initial-scale=1.0';
 
 	# Process params.
-	set_params($self, @params);
-
-	# Check to 'Tags' object.
-	if (! $self->{'tags'} || ! $self->{'tags'}->isa('Tags::Output')) {
-		err "Parameter 'tags' must be a 'Tags::Output::*' class.";
-	}
-
-	# Check to 'CSS::Struct' object.
-	if ($self->{'css'} && ! $self->{'css'}->isa('CSS::Struct::Output')) {
-		err "Parameter 'css' must be a 'CSS::Struct::Output::*' class.";
-	}
+	set_params($self, @{$object_params_ar});
 
 	# Check for 'css_src' array.
 	if (ref $self->{'css_src'} ne 'ARRAY') {
@@ -149,7 +140,7 @@ sub new {
 }
 
 # Process 'Tags'.
-sub process {
+sub _process {
 	my $self = shift;
 
 	my $css;
@@ -621,7 +612,8 @@ Returns undef.
 L<Class::Utils>,
 L<Error::Pure>,
 L<List::MoreUtils>,
-L<Readonly>.
+L<Readonly>,
+L<Tags::HTML>.
 
 =head1 SEE ALSO
 

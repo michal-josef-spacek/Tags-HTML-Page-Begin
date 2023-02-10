@@ -21,6 +21,7 @@ requires 'Class::Utils' => 0.02;
 requires 'Error::Pure' => 0.07;
 requires 'List::MoreUtils' => 0;
 requires 'Readonly' => 0;
+requires 'Tags::HTML' => 0.06;
 requires 'perl' => '5.8.0';
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Tags-HTML-Page-Begin/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Tags-HTML-Page-Begin';

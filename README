@@ -251,7 +251,7 @@ EXAMPLE1
      # </html>
 
 DEPENDENCIES
-    Class::Utils, Error::Pure, List::MoreUtils, Readonly.
+    Class::Utils, Error::Pure, List::MoreUtils, Readonly, Tags::HTML.
 
 SEE ALSO
     Tags::HTML::Page::End
