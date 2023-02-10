@@ -145,9 +145,6 @@ sub _process {
 
 	my $css;
 	if ($self->{'css'}) {
-		$self->{'css'}->put(
-			@{$self->{'css_init'}},
-		);
 		$css = $self->{'css'}->flush(1);
 		if ($css ne '') {
 			$css .= "\n";
@@ -275,6 +272,16 @@ sub _process {
 	$self->{'tags'}->put(
 		['e', 'head'],
 		['b', 'body'],
+	);
+
+	return;
+}
+
+sub _process_css {
+	my $self = shift;
+
+	$self->{'css'}->put(
+		@{$self->{'css_init'}},
 	);
 
 	return;
@@ -575,6 +582,7 @@ Returns undef.
  );
 
  # Process page
+ $begin->process_css;
  $css->put(
         ['s', 'div'],
         ['d', 'color', 'red'],
@@ -598,20 +606,20 @@ Returns undef.
  #   <head>
  #     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  #     <meta name="generator" content=
- #       "Perl module: Tags::HTML::Page::Begin, Version: 0.15" />
+ #       "Perl module: Tags::HTML::Page::Begin, Version: 0.16" />
  #     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  #     <title>
  #       Page title
  #     </title>
  #     <style type="text/css">
- # div {
- # 	color: red;
- # 	background-color: black;
- # }
  # * {
- # 	box-sizing: border-box;
- # 	margin: 0;
- # 	padding: 0;
+ #         box-sizing: border-box;
+ #         margin: 0;
+ #         padding: 0;
+ # }
+ # div {
+ #         color: red;
+ #         background-color: black;
  # }
  # </style>
  #   </head>

@@ -1,4 +1,5 @@
 0.16
+ - Add processing of CSS by Tags::HTML::_process_css().
  - Change of API in case of 'tags' parameter, could be undef (not much
    important), from Tags::HTML.
  - Mention css_init parameter in doc.
