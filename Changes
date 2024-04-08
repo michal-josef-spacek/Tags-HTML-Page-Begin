@@ -1,4 +1,5 @@
 0.17
+ - Rewrite from List::MoreUtils to List::Util.
  - Update Module::Install to 1.21 version.
  - Update copyright years.
 

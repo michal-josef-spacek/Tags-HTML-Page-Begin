@@ -6,7 +6,7 @@ use warnings;
 
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
-use List::MoreUtils qw(none);
+use List::Util 1.33 qw(none);
 use Readonly;
 
 # Constants.
@@ -634,7 +634,7 @@ Returns undef.
 
 L<Class::Utils>,
 L<Error::Pure>,
-L<List::MoreUtils>,
+L<List::Util>,
 L<Readonly>,
 L<Tags::HTML>.
 
